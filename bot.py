@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Токен бота и данные канала
-BOT_TOKEN = "8849903659:AAGRcdcolV50kCbTke9i9O2sOySs_EG8U6M"  # Обязательно вставь свой токен!
+BOT_TOKEN = "8849903659:AAGRcdcolV50kCbTke9i9O2sOySs_EG8U6M"
 CHANNEL_ID = "@Solo_Rush_Anime"
 CHANNEL_URL = "https://t.me/Solo_Rush_Anime"
 
@@ -31,7 +31,7 @@ async def cmd_start(message: types.Message):
 async def main():
     logging.basicConfig(level=logging.INFO)
     
-    # 1. Сначала поднимаем веб-сервер, чтобы Render сразу увидел открытый порт
+    # Поднимаем веб-сервер для порта Render
     app = web.Application()
     app.router.add_get("/", lambda r: web.Response(text="Bot is alive!"))
     runner = web.AppRunner(app)
@@ -42,7 +42,7 @@ async def main():
     await site.start()
     logging.info(f"Web server started on port {port}")
 
-    # 2. Запускаем бота
+    # Запускаем поллинг бота
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
