@@ -6,7 +6,7 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Токен бота и данные канала
-BOT_TOKEN = "ТВОЙ_ТОКЕН_БОТА"  # Обязательно вставь свой токен!
+BOT_TOKEN = "8849903659:AAGRcdcolV50kCbTke9i9O2sOySs_EG8U6M"  # Обязательно вставь свой токен!
 CHANNEL_ID = "@Solo_Rush_Anime"
 CHANNEL_URL = "https://t.me/Solo_Rush_Anime"
 
