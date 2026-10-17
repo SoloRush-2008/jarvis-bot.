@@ -5,18 +5,8 @@ from aiohttp import web
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Настройка веб-сервера для Render (чтобы не было Timed Out)
-async def start_web_server():
-    app = web.Application()
-    app.router.add_get("/", lambda r: web.Response(text="Bot is alive!"))
-    runner = web.AppRunner(app)
-    await runner.setup()
-    port = int(os.environ.get("PORT", 8080))
-    site = web.TCPSite(runner, "0.0.0.0", port)
-    await site.start()
-
-# Данные бота и канала
-BOT_TOKEN = "ТВОЙ_ТОКЕН_БОТА"  # Вставь сюда свой токен от BotFather
+# Токен бота и данные канала
+BOT_TOKEN = "ТВОЙ_ТОКЕН_БОТА"  # Обязательно вставь свой токен!
 CHANNEL_ID = "@Solo_Rush_Anime"
 CHANNEL_URL = "https://t.me/Solo_Rush_Anime"
 
@@ -40,9 +30,19 @@ async def cmd_start(message: types.Message):
 
 async def main():
     logging.basicConfig(level=logging.INFO)
-    # Запускаем веб-сервер для Render
-    await start_web_server()
-    # Запускаем бота
+    
+    # 1. Сначала поднимаем веб-сервер, чтобы Render сразу увидел открытый порт
+    app = web.Application()
+    app.router.add_get("/", lambda r: web.Response(text="Bot is alive!"))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    
+    port = int(os.environ.get("PORT", 10000))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    logging.info(f"Web server started on port {port}")
+
+    # 2. Запускаем бота
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
